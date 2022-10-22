@@ -1,4 +1,4 @@
-import random, time
+import random, time, keyboard
 kolory = ["Pik","Kier","Trefl","Karo"]
 numery = ["Dwa","Trzy","Cztery","Piec","Szesc","Siedem","Osiem","Dziewiec","Dziesiec","Walet","Dama","Krol","As"]
 wartosci = {"Dwa":2,"Trzy":3,"Cztery":4,"Piec":5,"Szesc":6,"Siedem":7,"Osiem":8,"Dziewiec":9,"Dziesiec":10,"Walet":11,"Dama":12,"Krol":13,"As":14}
@@ -53,6 +53,7 @@ if __name__ == "__main__":
     print("Zasady: Pierwszy i drugi zawodnik równocześnie wykładają po jednej karcie i porównują ich wartości (względem starszeństwa – kolory nie odgrywają roli).") 
     print("Gracz mający kartę o wyższej wartości odbiera karty i kładzie je pod spodem swojej talii. Jeśli karty mają taką samą siłę (as na asa, król na króla, itp.), rozpętuje się wojna")
     print("Wyciągane są pięc kart. Ostatnia wyciągnieta karta o wyższej wartości wygrywa, a zwycięzca wojny odbiera wszystkie karty wykorzystane w wojnie. Proces jest powtarzany, jeśli w okresie wojny znowu nie można wyłonić zwycięzcy. ")
+    print("Przy pytaniu o kontynuacji gry wpisanie 'q' kończy grę i wyznacza zwycięzcę na podstawie ilości kart graczy")
     print(" ")
     gracz_1 = Gracz(input("Podaj swoje imię pierwszy graczu: "))
     gracz_2 = Gracz(input("Podaj swoje imię drugi graczu: "))
@@ -69,8 +70,6 @@ if __name__ == "__main__":
 
     while game_on:
         print(" ")
-        print(f"Gracz {gracz_1.name} ma {len(gracz_1.reka)} kart")
-        print(f"Gracz {gracz_2.name} ma {len(gracz_2.reka)} kart")
         Ilosc_rund += 1
         print(f'Runda {Ilosc_rund}')
         
@@ -85,27 +84,31 @@ if __name__ == "__main__":
             game_on = False
             break
 
-        if input("wciśnij enter aby kontynuować gre ") ==  "q":
-            przerwanie_gry()
-            game_on = False
-            break
-                
         gracz_1_karty = []
         gracz_1_karty.append(gracz_1.wykladanie_karty())
         gracz_2_karty = []
         gracz_2_karty.append(gracz_2.wykladanie_karty())
+        
+        print(f"Gracz {gracz_1.name}")
         time.sleep(0.5)
-        print(gracz_1_karty[0], gracz_2_karty[0],sep = " vs ")
+        print(gracz_1_karty[0])
+        print("")
+        print(f"Gracz {gracz_2.name}")
+        time.sleep(0.5)
+        print(gracz_2_karty[0])
+        print("")
         jest_wojna = True
         while jest_wojna:
             if gracz_1_karty[-1].wartosc > gracz_2_karty[-1].wartosc:
                 gracz_1.odbieranie_kart(gracz_1_karty)
                 gracz_1.odbieranie_kart(gracz_2_karty)
+                print(f"Potyczkę wygrał {gracz_1.name}")
                 jest_wojna = False
 
             elif gracz_1_karty[-1].wartosc < gracz_2_karty[-1].wartosc:
                 gracz_2.odbieranie_kart(gracz_1_karty)
                 gracz_2.odbieranie_kart(gracz_2_karty)
+                print(f"Potyczkę wygrał {gracz_2.name}")
                 jest_wojna = False
 
             else:
@@ -129,4 +132,17 @@ if __name__ == "__main__":
                         gracz_2_karty.append(gracz_2.wykladanie_karty())
                         time.sleep(0.2)
                         print(gracz_1_karty[-1], gracz_2_karty[-1],sep = " vs ")
-                        
+        print(" ")
+        print(f"Gracz {gracz_1.name} ma {len(gracz_1.reka)} kart")
+        print(f"Gracz {gracz_2.name} ma {len(gracz_2.reka)} kart")
+
+        while True: 
+            koniec = input("Wciśnij enter aby kontynuować lub q aby zakończyć gre: ")
+            if koniec == "":
+                break
+            elif koniec == 'q':    
+                game_on = False
+                przerwanie_gry()
+                break
+            else:
+                print("Pamiętaj używaj tylko enter lub q")
