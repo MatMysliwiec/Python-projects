@@ -40,10 +40,22 @@ class Gracz():
         else:
             self.reka.append(nowe_karty)
 
+def przerwanie_gry():
+    if len(gracz_1.reka) > len(gracz_2.reka):
+        print(f"Gracz {gracz_1.name} wygrywa przez większą ilość kart")
+    elif len(gracz_1.reka) < len(gracz_2.reka):
+        print(f"Gracz {gracz_2.name} wygrywa przez większą ilość kart")
+    else:
+        print("Jest remis")
+
 if __name__ == "__main__":
-    
-    gracz_1 = Gracz("1")
-    gracz_2 = Gracz("2")
+    print("Witajcie w grze WOJNA!!")
+    print("Zasady: Pierwszy i drugi zawodnik równocześnie wykładają po jednej karcie i porównują ich wartości (względem starszeństwa – kolory nie odgrywają roli).") 
+    print("Gracz mający kartę o wyższej wartości odbiera karty i kładzie je pod spodem swojej talii. Jeśli karty mają taką samą siłę (as na asa, król na króla, itp.), rozpętuje się wojna")
+    print("Wyciągane są pięc kart. Ostatnia wyciągnieta karta o wyższej wartości wygrywa, a zwycięzca wojny odbiera wszystkie karty wykorzystane w wojnie. Proces jest powtarzany, jeśli w okresie wojny znowu nie można wyłonić zwycięzcy. ")
+    print(" ")
+    gracz_1 = Gracz(input("Podaj swoje imię pierwszy graczu: "))
+    gracz_2 = Gracz(input("Podaj swoje imię drugi graczu: "))
     nowa_talia=Talia()
     nowa_talia.shuffle()
     ilosc_wojn = 0
@@ -57,9 +69,11 @@ if __name__ == "__main__":
 
     while game_on:
         print(" ")
+        print(f"Gracz {gracz_1.name} ma {len(gracz_1.reka)} kart")
+        print(f"Gracz {gracz_2.name} ma {len(gracz_2.reka)} kart")
         Ilosc_rund += 1
         print(f'Runda {Ilosc_rund}')
-
+        
         if len(gracz_1.reka) == 0:
             print(f"Gracz {gracz_1.name} nie ma kart \nWygrawa Gracz {gracz_2.name}")
             print(f'Ilosc wojn w rozgrywce {ilosc_wojn}')
@@ -71,12 +85,17 @@ if __name__ == "__main__":
             game_on = False
             break
 
+        if input("wciśnij enter aby kontynuować gre ") ==  "q":
+            przerwanie_gry()
+            game_on = False
+            break
+                
         gracz_1_karty = []
         gracz_1_karty.append(gracz_1.wykladanie_karty())
         gracz_2_karty = []
         gracz_2_karty.append(gracz_2.wykladanie_karty())
+        time.sleep(0.5)
         print(gracz_1_karty[0], gracz_2_karty[0],sep = " vs ")
-        time.sleep(0.2)
         jest_wojna = True
         while jest_wojna:
             if gracz_1_karty[-1].wartosc > gracz_2_karty[-1].wartosc:
@@ -105,8 +124,9 @@ if __name__ == "__main__":
                     game_on = False
                     break
                 else:
-                    for num in range(3):
+                    for num in range(5):
                         gracz_1_karty.append(gracz_1.wykladanie_karty())
                         gracz_2_karty.append(gracz_2.wykladanie_karty())
-                        print(gracz_1_karty[-1], gracz_2_karty[-1],sep = " vs ")
                         time.sleep(0.2)
+                        print(gracz_1_karty[-1], gracz_2_karty[-1],sep = " vs ")
+                        
