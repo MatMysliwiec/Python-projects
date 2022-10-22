@@ -1,4 +1,4 @@
-import random
+import random, time
 kolory = ["Pik","Kier","Trefl","Karo"]
 numery = ["Dwa","Trzy","Cztery","Piec","Szesc","Siedem","Osiem","Dziewiec","Dziesiec","Walet","Dama","Krol","As"]
 wartosci = {"Dwa":2,"Trzy":3,"Cztery":4,"Piec":5,"Szesc":6,"Siedem":7,"Osiem":8,"Dziewiec":9,"Dziesiec":10,"Walet":11,"Dama":12,"Krol":13,"As":14}
@@ -56,7 +56,7 @@ if __name__ == "__main__":
     Ilosc_rund = 0
 
     while game_on:
-
+        print(" ")
         Ilosc_rund += 1
         print(f'Runda {Ilosc_rund}')
 
@@ -75,7 +75,8 @@ if __name__ == "__main__":
         gracz_1_karty.append(gracz_1.wykladanie_karty())
         gracz_2_karty = []
         gracz_2_karty.append(gracz_2.wykladanie_karty())
-
+        print(gracz_1_karty[0], gracz_2_karty[0],sep = " vs ")
+        time.sleep(0.2)
         jest_wojna = True
         while jest_wojna:
             if gracz_1_karty[-1].wartosc > gracz_2_karty[-1].wartosc:
@@ -89,7 +90,9 @@ if __name__ == "__main__":
                 jest_wojna = False
 
             else:
+                print(" ")
                 print("Wojna!!")
+                print(" ")
                 ilosc_wojn +=1
                 if len(gracz_1.reka) < 3:
                     print(f"Gracz {gracz_1.name} nie jest w stanie wypowiedziec wojny \nGracz {gracz_2.name} wygrywa")
@@ -105,3 +108,5 @@ if __name__ == "__main__":
                     for num in range(3):
                         gracz_1_karty.append(gracz_1.wykladanie_karty())
                         gracz_2_karty.append(gracz_2.wykladanie_karty())
+                        print(gracz_1_karty[-1], gracz_2_karty[-1],sep = " vs ")
+                        time.sleep(0.2)
