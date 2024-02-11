@@ -10,8 +10,15 @@ def calculator(arg):
         for operator, operand in zip(argument[1::2], argument[2::2]):
             if operator == "+":
                 result += operand
-            else:
+            elif operator == "-":
                 result -= operand
+            elif operator == "*":
+                result *= operand
+            elif operator == "/":
+                result /= operand
+            elif operator == "**":
+                result **= operand
+
         return result
 
     return arg_collector
