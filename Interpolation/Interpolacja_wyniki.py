@@ -38,9 +38,9 @@ y_int = [interpol(phi, xy) for phi in x_int]
 
 plt.scatter(x, y, color='black', s=30, label='Wezły')
 plt.scatter(x_rz, y_rz, color='black', s=1, label='Dane dokładne')
-plt.scatter(x_int, y_int, color='red', s=1, label=f'Interpolacja ({n} węzłów)')
+plt.scatter(x_int, y_int, color='red', s=1, label=f'Interpolation ({n} węzłów)')
 plt.xlabel('x')
 plt.ylabel('y')
 plt.legend()
-plt.title('Interpolacja Lagrange\'a')
+plt.title('Interpolation Lagrange\'a')
 plt.show()
