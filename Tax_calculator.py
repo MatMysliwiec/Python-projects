@@ -18,7 +18,8 @@ def calculate_pit(cost, deductible_cost):
         tax = tax + Itax
         total_cost = cost + tax
         return tax, total_cost
-
+    else:
+        return cost, cost
 
 try:
     while True:
