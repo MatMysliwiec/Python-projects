@@ -8,6 +8,14 @@ def create_graph(links):
     return g
 
 
+def is_connected(graph):
+    statement = nx.is_connected(graph)
+    if statement:
+        return print("The graph is connected")
+    else:
+        return print("The graph is not connected")
+
+
 def draw_graph(graph):
     pos = nx.circular_layout(graph)
     # pos = nx.kamada_kawai_layout(graph)
@@ -31,8 +39,8 @@ if __name__ == "__main__":
         ('A', 'D')
     ]
 
-    # Create graph
     my_graph = create_graph(example_links)
 
-    # Draw the graph
+    is_connected(my_graph)
+
     draw_graph(my_graph)
