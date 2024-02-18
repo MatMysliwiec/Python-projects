@@ -1,6 +1,7 @@
 import math
 import random
 
+
 class Point:
     def __init__(self, x, y):
         self.x = x
@@ -66,8 +67,8 @@ def closest(P, n):
 
 
 P = []
-for i in range(0,10):
-    x = random.randint(0,30)
+for i in range(0, 10):
+    x = random.randint(0, 30)
     y = random.randint(0, 30)
     P.append(Point(x, y))
 n = len(P)
