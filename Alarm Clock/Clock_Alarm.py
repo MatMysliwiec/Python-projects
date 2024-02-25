@@ -1,6 +1,16 @@
 import time
 import pygame
+import tkinter as tk
+from tkinter import ttk
 
+
+def pomodoro_timer(work_duration, break_duration, cycles):
+    for cycle in range(cycles):
+        print(f"Pomodoro cycle: {cycle + 1}")
+        set_alarm(work_duration * 60)
+        print("Take a break!")
+        set_alarm(break_duration*60)
+    print("Pomodoro Timer completed.")
 
 def play_alarm():
     pygame.init()
@@ -8,14 +18,14 @@ def play_alarm():
     pygame.mixer.music.play()
 
     while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(10)
+        pygame.time.Clock().tick(8)
 
 
 def set_alarm(duration):
     time.sleep(duration)
     play_alarm()
 
-
+'''
 choice = input("Set by time(T) or duration(D)")
 
 if choice.lower().startswith("t"):
@@ -34,3 +44,11 @@ elif choice.lower().startswith("d"):
 
 else:
     print("Invalid choice")
+'''
+
+
+if __name__ == "__main__":
+    work_time = int(input("Enter time of work: "))
+    break_time = int(input("Enter break time: "))
+    cycles = int(input("Enter number of cycles: "))
+    pomodoro_timer(work_time, break_time, cycles)
