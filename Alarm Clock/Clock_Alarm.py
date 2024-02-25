@@ -4,51 +4,88 @@ import tkinter as tk
 from tkinter import ttk
 
 
-def pomodoro_timer(work_duration, break_duration, cycles):
-    for cycle in range(cycles):
-        print(f"Pomodoro cycle: {cycle + 1}")
-        set_alarm(work_duration * 60)
-        print("Take a break!")
-        set_alarm(break_duration*60)
-    print("Pomodoro Timer completed.")
-
 def play_alarm():
     pygame.init()
     pygame.mixer.music.load("alarm-clock.mp3")
     pygame.mixer.music.play()
-
-    while pygame.mixer.music.get_busy():
-        pygame.time.Clock().tick(8)
 
 
 def set_alarm(duration):
     time.sleep(duration)
     play_alarm()
 
-'''
-choice = input("Set by time(T) or duration(D)")
 
-if choice.lower().startswith("t"):
-    alarm_time = input("Enter the alarm time in HH:MM format: ")
-    current_time = time.strftime("%H:%M")
+class PomodoroTimer:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("Pomodoro Timer")
+        self.master.geometry("300x150")
 
-    while current_time != alarm_time:
-        current_time = time.strftime("%H:%M")
-        time.sleep(1)
-    print("ALARM!")
-    play_alarm()
+        self.work_duration = 30 * 60
+        self.break_duration = 10 * 60
+        self.cycles = 5
+        self.current_cycle = 0
+        self.is_work_time = True
 
-elif choice.lower().startswith("d"):
-    alarm_duration = int(input("Enter the alarm duration in minutes: "))
-    set_alarm(alarm_duration * 60)
+        self.info_label = ttk.Label(self.master, text="", font=("Helvetica", 12))
+        self.info_label.pack(pady=10)
 
-else:
-    print("Invalid choice")
-'''
+        self.timer_label = ttk.Label(self.master, text="", font=("Helvetica", 24))
+        self.timer_label.pack(pady=10)
+
+        self.start_button = ttk.Button(self.master, text="Start", command=self.start_pomodoro_timer)
+        self.start_button.pack(pady=10)
+
+    def start_pomodoro_timer(self):
+        if self.current_cycle < self.cycles:
+            self.timer_label.after(0, self.update_timer)
+            self.timer_label.config(font=("Helvetica", 24))
+            self.start_button.config(state="disabled")
+
+    def update_timer(self):
+        if self.work_duration > 0:
+            self.display_time(self.work_duration)
+            self.work_duration -= 1
+            self.display_info()
+            if self.work_duration == 0:
+                play_alarm()
+                self.is_work_time = False
+        elif self.break_duration > 0:
+            self.display_time(self.break_duration)
+            self.break_duration -= 1
+            self.display_info()
+            if self.break_duration == 0 and self.current_cycle < self.cycles:
+                play_alarm()
+                self.current_cycle += 1
+                self.is_work_time = True
+        else:
+            if self.current_cycle < self.cycles:
+                self.work_duration = 30 * 60
+                self.break_duration = 10 * 60
+                #self.timer_label.after(0, self.update_timer)
+                #self.timer_label.config(font=("Helvetica", 24))
+            else:
+                self.timer_label.config(text="Pomodoro Timer completed.", font=("Helvetica", 12))
+                self.start_button.config(state="normal")
+                self.current_cycle = 0
+                return
+
+        self.timer_label.after(1000, self.update_timer)
+
+    def display_time(self, duration):
+        minuts, secods = divmod(duration, 60)
+        time_str = f"{minuts:02d}:{secods:02d}"
+        self.timer_label.config(text=time_str)
+
+    def display_info(self):
+        if self.is_work_time:
+            info_str = f"Work Time - Cycle {self.current_cycle + 1}"
+        else:
+            info_str = f"Break Time - Cycle {self.current_cycle + 1}"
+        self.info_label.config(text=info_str)
 
 
 if __name__ == "__main__":
-    work_time = int(input("Enter time of work: "))
-    break_time = int(input("Enter break time: "))
-    cycles = int(input("Enter number of cycles: "))
-    pomodoro_timer(work_time, break_time, cycles)
+    root = tk.Tk()
+    app = PomodoroTimer(root)
+    root.mainloop()
