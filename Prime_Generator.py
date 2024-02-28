@@ -1,3 +1,4 @@
+import sys
 from math import isqrt
 
 
@@ -26,11 +27,12 @@ def generator(current: int):
 
 currentPrime = 2
 while True:
-    koniec = input("Would you like to generate another prime number? y/n: ")
-    if koniec.lower().startswith('y'):
-        print(currentPrime, end="\n")
-        currentPrime = generator(currentPrime)
-    elif koniec.lower().startswith('n'):
-        break
-    else:
+    counts = input("Would you like to generate another prime number, press enter. To exit press esc) ")
+    try:
+        if counts.lower() == '':
+            print(currentPrime, end="\n")
+            currentPrime = generator(currentPrime)
+        elif counts.lower() == 'q':
+            break
+    except ValueError:
         print("Try again", end="\n")
