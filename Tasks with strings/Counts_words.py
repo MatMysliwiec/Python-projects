@@ -15,5 +15,5 @@ def from_file(file):
         print("An error occurred: ", e)
 
 
-file_path = r"C:\Users\User\OneDrive - Politechnika Krakowska im. Tadeusza Kościuszki\Pulpit\Projekty_python\Inverted_index\Text\file1.txt"
+file_path = r"/Inverted_index/Text/file1.txt"
 from_file(file_path)

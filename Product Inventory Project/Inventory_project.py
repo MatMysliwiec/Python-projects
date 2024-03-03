@@ -24,13 +24,13 @@ class Inventory:
         for product in self.products:
             total_value += product.get_value()
         return total_value
+
     def display_inventory(self):
         for product in self.products:
             print(product)
 
 
 if __name__ == "__main__":
-
     product1 = Product(1, "Laptop", 1000, 5)
     product2 = Product(2, "Smartphone", 500, 10)
     product3 = Product(3, "Tablet", 300, 8)
