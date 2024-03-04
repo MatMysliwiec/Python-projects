@@ -22,10 +22,6 @@ def generate_pdf():
         return "No selected file"
 
     content = file.read()
-
-    # You can add logic here to handle different file formats, like HTML, text, etc.
-
-    # Generate PDF using WeasyPrint
     pdf_file_path = 'generated_file.pdf'
     HTML(string=content).write_pdf(pdf_file_path)
 
