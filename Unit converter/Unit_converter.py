@@ -1,8 +1,25 @@
 class UnitConverter:
     def temperature_converter(self):
+
+        print("Which converter")
+        print("1: Celsius to Fahrenheit")
+        print("2: Fahrenheit to Celsius")
+        self.choise_temp = input("Which option: ")
+
+        if self.choise_temp == "1":
+            self.cel_to_feh()
+        elif self.choise_temp == "2":
+            self.feh_to_cel()
+
+    def cel_to_feh(self):
         celsius = float(input("Enter temperature in Celsius: "))
         fahrenheit = (celsius * 9/5) + 32
-        print(f"{celsius} Celsius is equal to {fahrenheit} Fahrenheit")
+        print(f"{celsius:.3f} Celsius is equal to {fahrenheit:.3f} Fahrenheit")
+
+    def feh_to_cel(self):
+        fahrenheit = float(input("Enter temperature in Fahrenheit: "))
+        celsius = (fahrenheit - 32) * 5/9
+        print(f"{fahrenheit:.3f} Fahrenheit is equal to {celsius:.3f} Celsius")
 
     def currency_converter(self):
         usd_amount = float(input("Enter amount in USD: "))

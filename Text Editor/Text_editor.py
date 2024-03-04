@@ -31,7 +31,8 @@ class TextEditor:
                 self.text_widget.insert(tk.END, content)
 
     def save_file(self):
-        file_path = filedialog.asksaveasfile(defaultextension=".txt", mode="w")
+        file_path = filedialog.asksaveasfilename(defaultextension=".txt",
+                                               filetypes=[("Text files", "*.txt"), ("All files", "*.*")])
         if file_path:
             with open(file_path, "w") as file:
                 content = self.text_widget.get(1.0, tk.END)
