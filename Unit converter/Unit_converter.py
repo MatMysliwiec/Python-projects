@@ -1,72 +1,63 @@
-class UnitConverter:
+import tkinter as tk
+
+
+class UnitConverterGUI:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("Unit Converter")
+        self.master.geometry("800x600")
+
+        self.label = tk.Label(master, text="Select the type of converter:")
+        self.label.pack(pady=10)
+
+        self.choices = [
+            "Temperature Converter",
+            "Currency Converter",
+            "Volume Converter",
+            "Mass Converter",
+            "Length Converter"
+        ]
+
+        self.selected_converter = tk.StringVar(master)
+        self.selected_converter.set(self.choices[0])
+
+        self.converter_menu = tk.OptionMenu(master, self.selected_converter, *self.choices)
+        self.converter_menu.pack(pady=10)
+
+        self.convert_button = tk.Button(master, text="Convert", command=self.convert)
+        self.convert_button.pack(pady=10)
+
+    def convert(self):
+        selected_option = self.selected_converter.get()
+
+        if selected_option == "Temperature Converter":
+            self.temperature_converter()
+        elif selected_option == "Currency Converter":
+            self.currency_converter()
+        elif selected_option == "Volume Converter":
+            self.volume_converter()
+        elif selected_option == "Mass Converter":
+            self.mass_converter()
+        elif selected_option == "Length Converter":
+            self.length_converter()
+
     def temperature_converter(self):
-
-        print("Which converter")
-        print("1: Celsius to Fahrenheit")
-        print("2: Fahrenheit to Celsius")
-        self.choise_temp = input("Which option: ")
-
-        if self.choise_temp == "1":
-            self.cel_to_feh()
-        elif self.choise_temp == "2":
-            self.feh_to_cel()
-
-    def cel_to_feh(self):
-        celsius = float(input("Enter temperature in Celsius: "))
-        fahrenheit = (celsius * 9/5) + 32
-        print(f"{celsius:.3f} Celsius is equal to {fahrenheit:.3f} Fahrenheit")
-
-    def feh_to_cel(self):
-        fahrenheit = float(input("Enter temperature in Fahrenheit: "))
-        celsius = (fahrenheit - 32) * 5/9
-        print(f"{fahrenheit:.3f} Fahrenheit is equal to {celsius:.3f} Celsius")
+        pass
 
     def currency_converter(self):
-        usd_amount = float(input("Enter amount in USD: "))
-        exchange_rate = float(input("Enter the exchange rate (USD to EUR): "))
-        eur_amount = usd_amount * exchange_rate
-        print(f"{usd_amount} USD is equal to {eur_amount} EUR")
+        pass
 
     def volume_converter(self):
-        liters = float(input("Enter volume in liters: "))
-        gallons = liters * 0.264172
-        print(f"{liters} Liters is equal to {gallons} Gallons")
+        pass
 
     def mass_converter(self):
-        kilograms = float(input("Enter mass in kilograms: "))
-        pounds = kilograms * 2.20462
-        print(f"{kilograms} Kilograms is equal to {pounds} Pounds")
+        pass
 
     def length_converter(self):
-        meters = float(input("Enter length in meters: "))
-        feet = meters * 3.28084
-        print(f"{meters} Meters is equal to {feet} Feet")
+        pass
 
-    # Add more conversion methods as needed...
-
-def main():
-    unit_converter = UnitConverter()
-
-    print("1. Temperature Converter")
-    print("2. Currency Converter")
-    print("3. Volume Converter")
-    print("4. Mass Converter")
-    print("5. Length Converter")
-
-    choice = int(input("Select the type of converter (1-5): "))
-
-    if choice == 1:
-        unit_converter.temperature_converter()
-    elif choice == 2:
-        unit_converter.currency_converter()
-    elif choice == 3:
-        unit_converter.volume_converter()
-    elif choice == 4:
-        unit_converter.mass_converter()
-    elif choice == 5:
-        unit_converter.length_converter()
-    else:
-        print("Invalid choice. Please enter a number between 1 and 5.")
 
 if __name__ == "__main__":
-    main()
+    root = tk.Tk()
+    app = UnitConverterGUI(root)
+    root.mainloop()
