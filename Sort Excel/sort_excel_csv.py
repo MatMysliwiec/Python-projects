@@ -8,8 +8,8 @@ def sort_csv(file_path, sort_column, sort_order="asc"):
 
 
 if __name__ == "__main__":
-    file_path = input("Enter the path of the CSV file: ")
-    sort_column = input("Enter the column to sort by: ")
+    file_path = r"C:\Users\User\OneDrive - Politechnika Krakowska im. Tadeusza Kościuszki\Pulpit\Projekty_python\Sort Excel\excel_sorting_practice.csv"
+    sort_column = "Last Name"
     sort_order = input("Enter the sort order (asc/desc): ")
 
     while sort_order.lower() not in ['asc', 'desc']:
@@ -18,4 +18,4 @@ if __name__ == "__main__":
 
     sort_csv(file_path, sort_column, sort_order)
 
-    print(f"File '{file_path}' has been sorted based on column '{sort_column}' in {sort_order}ending order.")
+    print(f"File '{file_path}' has been sorted based on column '{sort_column}' in {sort_order} ending order.")

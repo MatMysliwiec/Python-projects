@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1686571429 source:c:\users\user\onedrive - politechnika krakowska im. tadeusza koœciuszki\pulpit\studia\ft ii stopieñ\symulacje komputerowe\zad4\main.cpp
+	<iostream>
+	<fstream>
+	<allegro5/allegro.h>
+	<allegro5/allegro_primitives.h>
+
+1686776003 source:c:\users\user\onedrive - politechnika krakowska im. tadeusza koœciuszki\pulpit\studia\ft ii stopieñ\symulacje komputerowe\semestr i\zad4\main.cpp
+	<iostream>
+	<fstream>
+	<allegro5/allegro.h>
+	<allegro5/allegro_primitives.h>
+

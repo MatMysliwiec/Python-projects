@@ -30,6 +30,6 @@ class PageScraper:
 
 
 if __name__ == "__main__":
-    base_url = ""
+    base_url = r"https://imf.pk.edu.pl/"
     scraper = PageScraper(base_url)
     scraper.scrape_and_save()

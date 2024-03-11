@@ -23,7 +23,7 @@ class JPEGImage(ImageBase):
 
     def display(self, canvas):
         tk_image = ImageTk.PhotoImage(self.image)
-        canvas.create_image(0, 0, archor=tk.NW, image=tk_image)
+        canvas.create_image(0, 0, anchor=tk.NW, image=tk_image)
         canvas.tk_image = tk_image
 
 
@@ -39,8 +39,10 @@ class ImageGalleryApp:
 
     def load_images(self, image_paths):
         for path in image_paths:
-            if path.lower().endswith(".jpg") or path.lower().endswith(".jpeg") or path.lower().endswith(".png"):
+            if path.lower().endswith((".jpg", ".jpeg", ".png")):
                 image = JPEGImage()
+                image.load(path)
+                self.images.append(image)
             else:
                 raise ValueError(f"Unsupported image type for file: {path}")
 
@@ -50,12 +52,16 @@ class ImageGalleryApp:
 
         for i, image in enumerate(self.images):
             canvas = tk.Canvas(gallery_frame, width=300, height=200)
-            canvas.grid(row=i // 3, column=1 % 3, padx=10, pady=10)
+            canvas.grid(row=i // 3, column=i % 3, padx=10, pady=10)
             image.display(canvas)
 
 
 if __name__ == "__main":
     root = tk.Tk()
-    image_paths = []
+    image_paths = [
+        r"C:\Users\User\OneDrive - Politechnika Krakowska im. Tadeusza Kościuszki\Pulpit\Projekty_python\Image gallery\Image file\img1.jpg",
+        r"C:\Users\User\OneDrive - Politechnika Krakowska im. Tadeusza Kościuszki\Pulpit\Projekty_python\Image gallery\Image file\img2.jpg",
+        r"C:\Users\User\OneDrive - Politechnika Krakowska im. Tadeusza Kościuszki\Pulpit\Projekty_python\Image gallery\Image file\img3.jpg"
+    ]
     app = ImageGalleryApp(root, image_paths)
     root.mainloop()

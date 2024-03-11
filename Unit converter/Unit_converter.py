@@ -66,9 +66,8 @@ class UnitConverter:
 
         self.to_value_entry.config(state="normal")
         self.to_value_entry.delete(0, tk.END)
-        self.from_value_entry.delete(0,tk.END)
+        self.from_value_entry.delete(0, tk.END)
         self.to_value_entry.config(state="readonly")
-
 
         def callback_temp():
             from_value = self.from_value_entry.get()

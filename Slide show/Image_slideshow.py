@@ -24,16 +24,16 @@ class SlideshowApp:
         current_image = self.photo_images[self.current_image_index]
         self.canvas.create_image(0, 0, anchor=tk.NW, image=current_image)
 
-        self.master.after(self.transition_duration, self.face_out)
+        self.master.after(self.transition_duration, self.fade_out)
 
     def fade_out(self):
-        for alpha in range(255, -1, -10):
+        for alpha in range(255, -1, -1):
             self.canvas.delete("all")
             current_image = self.photo_images[self.current_image_index]
             current_image.putalpha(alpha)
             self.canvas.create_image(0, 0, archor=tk.NW, image=current_image)
             self.master.update()
-            time.sleep(0.03)
+            time.sleep(0.5)
 
         self.master.after(10, self.next_image)
 
@@ -48,7 +48,11 @@ if __name__ == "__main__":
     root.title("Slideshow App")
     root.geometry("800x600")
 
-    image_paths = ["image1.jpg", "image2.jpg"]
+    image_paths = [
+        r"C:\Users\User\OneDrive - Politechnika Krakowska im. Tadeusza Kościuszki\Pulpit\Projekty_python\Slide show\Image files\img1.jpg",
+        r"C:\Users\User\OneDrive - Politechnika Krakowska im. Tadeusza Kościuszki\Pulpit\Projekty_python\Slide show\Image files\img2.jpg",
+        r"C:\Users\User\OneDrive - Politechnika Krakowska im. Tadeusza Kościuszki\Pulpit\Projekty_python\Slide show\Image files\img3.jpg"
+    ]
     duration = 2000
 
     app = SlideshowApp(root, image_paths, duration)
