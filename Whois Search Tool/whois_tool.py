@@ -1,9 +1,10 @@
-import whois
+from ipwhois import IPWhois
 
 
 def whois_lookup(query):
     try:
-        result = whois.whois(query)
+        ipwhois = IPWhois(query)
+        result = ipwhois.lookup_rdap()
         return result
     except Exception as e:
         print(f"Error: {e}")
@@ -11,4 +12,10 @@ def whois_lookup(query):
 
 if __name__ == "__main__":
     user_input = input("Enter an IP address or host address: ")
-    print(whois_lookup(user_input))
+    result = whois_lookup(user_input)
+    if isinstance(result, dict):
+        print("WHOIS Results:")
+        for key, value in result.items():
+            print(f"{key}: {value}")
+    else:
+        print(result)

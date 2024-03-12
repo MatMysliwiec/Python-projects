@@ -20,7 +20,6 @@ def display_posts(feed_data):
 
 
 if __name__ == "__main__":
-    # Replace the URL with the RSS/Atom feed URL you want to read
     feed_url = "http://www.cbssports.com/partners/feeds/rss/home_news"
 
     try:
