@@ -34,7 +34,6 @@ class PomodoroTimer:
         self.current_cycle = 0
         self.is_work_time = True
         self.pause = False
-        self.timer_running = False
 
         self.info_label = ttk.Label(self.master, text="", font=("Helvetica", 12))
         self.info_label.pack(pady=10)
@@ -58,22 +57,24 @@ class PomodoroTimer:
         settings_dialog = tk.Toplevel(self.master)
         settings_dialog.title("Timer Settings")
 
-        def update_total_time_label(*args):
+        def update_total_time_label():
+            # noinspection PyBroadException
             try:
-                work_value = self.work_duration.get() * 60
-                break_value = self.break_duration.get() * 60
-                cycles_value = self.cycles.get()
+                work_value = self.work_duration.get() * 60 if self.work_duration.get() else 0
+                break_value = self.break_duration.get() * 60 if self.break_duration.get() else 0
+                cycles_value = self.cycles.get() if self.cycles.get() else 0
                 total_time = (work_value + break_value) * cycles_value
                 total_time_str = time.strftime("%H:%M:%S", time.gmtime(total_time))
                 total_time_value.config(text=total_time_str)
-            except ValueError:
-                total_time_value.config(text="Invalid Input")
+            except Exception:
+                pass
 
         work_label = ttk.Label(settings_dialog, text="Work Duration (min)")
         work_label.grid(row=0, column=0, padx=10, pady=5)
         work_entry = ttk.Entry(settings_dialog, textvariable=self.work_duration)
         work_entry.grid(row=0, column=1, padx=10, pady=5)
-        self.work_duration.trace_add("write", lambda name, index, mode, var=self.work_duration: update_total_time_label())
+        self.work_duration.trace_add("write",
+                                     lambda name, index, mode, var=self.work_duration: update_total_time_label())
 
         break_label = ttk.Label(settings_dialog, text="Break Duration (min)")
         break_label.grid(row=1, column=0, padx=10, pady=5)
@@ -120,7 +121,6 @@ class PomodoroTimer:
         if self.current_cycle < self.cycles:
             self.timer_label.after(0, self.update_timer)
             self.timer_label.config(font=("Helvetica", 24))
-            self.timer_running = True
 
     def toggle_timer(self):
         if not self.pause:
@@ -150,29 +150,30 @@ class PomodoroTimer:
                     self.is_work_time = True
             else:
                 if self.current_cycle < self.cycles:
-                    self.work_duration = self.default_work_duration
-                    self.break_duration = self.default_break_duration
+                    self.work_duration = self.default_work_duration * 60
+                    self.break_duration = self.default_break_duration * 60
                 else:
                     self.timer_label.config(text="Pomodoro Timer completed.", font=("Helvetica", 12))
                     self.start_button.config(state="normal")
                     self.current_cycle = 0
-                    self.timer_running = False
                     return
 
             self.timer_label.after(1000, self.update_timer)
 
     def reset_timer(self):
-        if self.timer_running:
-            self.timer_label.after_cancel(self.update_timer)
         self.is_work_time = True
         self.pause = False
         self.start_button.config(text="Pause")
-        self.work_duration = self.default_work_duration * 60
-        self.break_duration = self.default_break_duration * 60
-        self.cycles = self.default_cycles
+        self.work_duration = tk.IntVar(value=self.default_work_duration)
+        self.break_duration = tk.IntVar(value=self.default_break_duration)
+        self.cycles = tk.IntVar(value=self.default_cycles)
         self.current_cycle = 0
-        self.timer_running = False
-        self.toggle_timer()
+        self.timer_label.after_cancel(self.update_timer)
+        self.info_label.config(text="")
+        self.timer_label.config(text="")
+        self.start_button.config(state="disabled")
+        self.reset_button.config(state="disabled")
+        self.show_settings_dialog()
 
     def display_time(self, duration):
         minuts, secods = divmod(duration, 60)

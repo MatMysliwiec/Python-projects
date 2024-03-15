@@ -1,5 +1,4 @@
 from PIL import Image
-import imageio
 from moviepy.editor import VideoFileClip
 import os
 
@@ -18,10 +17,10 @@ def create_from_image(image_folder, gif_path, duration=0.2):
     images[0].save(gif_path, save_all=True, append_images=images[1:], duration=duration, loop=0)
     print("Convert images to gif completed.")
 
-def convert_video_to_gif(video_path, gif_path, duration=0.2):
+def convert_video_to_gif(video_path, gif_path, duration=0.1):
     try:
         clip = VideoFileClip(video_path)
-        clip.write_gif(gif_path, fps=1/duration, program='imageio_ffmpeg')
+        clip.write_videofile(gif_path, fps=1/duration, codec='gif')
     except Exception as e:
         print("Error: ", e)
     print("Convert video to gif completed.")

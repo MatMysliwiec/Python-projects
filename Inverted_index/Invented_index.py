@@ -27,21 +27,21 @@ def search(inverted_index, query):
 
     return list(result)
 
+if __name__ == "__main__":
+    directory_path = r'C:\Users\User\OneDrive - Politechnika Krakowska im. Tadeusza Kościuszki\Pulpit\Projekty_python\Inverted_index\Text'
+    files = [os.path.join(directory_path, file) for file in os.listdir(directory_path) if file.endswith(".txt")]
+    inverted_index = build(files)
 
-directory_path = r'C:\Users\User\OneDrive - Politechnika Krakowska im. Tadeusza Kościuszki\Pulpit\Projekty_python\Inverted_index\Text'
-files = [os.path.join(directory_path, file) for file in os.listdir(directory_path) if file.endswith(".txt")]
-inverted_index = build(files)
+    while True:
+        search_query = input("Enter search query: ")
+        if search_query == "exit":
+            break
 
-while True:
-    search_query = input("Enter search query: ")
-    if search_query == "exit":
-        break
+        search_result = search(inverted_index, search_query)
 
-    search_result = search(inverted_index, search_query)
-
-    if search_result:
-        print("Matching files:")
-        for file_name in search_result:
-            print(f"- {file_name}")
-    else:
-        print("No matching files")
+        if search_result:
+            print("Matching files:")
+            for file_name in search_result:
+                print(f"- {file_name}")
+        else:
+            print("No matching files")
