@@ -1,40 +1,51 @@
-def bintodec(number: int):
-    result = int(number, 2)
-    return result
+import tkinter as tk
 
 
-def dectobin(number: int):
-    result = bin(number).replace("0b", "")
-    return result
+class ConvertBINtoDEC:
+    def __init__(self, master):
+        self.master = master
+        self.master.title("Binary to Decimal Converter")
+        self.master.geometry("600x450")
+
+        self.title_label = tk.Label(master, text="Bin to Dec(Dec to Bin) Converter", font=("Helvetica", 20))
+        self.title_label.pack(pady=10)
+
+        self.bin_to_dec_button = tk.Button(master, text="Bin to Dec", font="Verdana 15", command=self.bin_to_dec)
+        self.bin_to_dec_button.pack(pady=10)
+
+        self.dec_to_bin_button = tk.Button(master, text="Dec to Bin", font="Verdana 15", command=self.dec_to_bin)
+        self.dec_to_bin_button.pack(pady=10)
+
+        self.from_label = tk.Label(master, text="From:", font=("Helvetica", 12))
+        self.from_label.pack(side=tk.LEFT, padx=10, pady=10)
+
+        self.to_label = tk.Label(master, text="To:", font=("Helvetica", 12))
+        self.to_label.pack(side=tk.LEFT, padx=10, pady=10)
+
+        self.from_entry = tk.Entry(master)
+        self.from_entry.pack(padx=10, pady=10)
+
+        self.to_entry = tk.Entry(master, state="readonly")
+        self.to_entry.pack(padx=10, pady=10)
+
+    def bin_to_dec(self):
+        from_value = self.from_entry.get()
+        result = int(from_value, 2)
+        self.to_entry.config(state="normal")
+        self.to_entry.delete(0, tk.END)
+        self.to_entry.insert(0, result)
+        self.to_entry.config(state="readonly")
+
+    def dec_to_bin(self):
+        from_value = int(self.from_entry.get())
+        result = bin(from_value).replace("0b", "")
+        self.to_entry.config(state="normal")
+        self.to_entry.delete(0, tk.END)
+        self.to_entry.insert(0, result)
+        self.to_entry.config(state="normal")
 
 
-print("Zamiana liczby bin na dec - 1", end="\n")
-print("Zamiana liczby dec na bin - 2", end="\n")
-print("Wyjście z programu - 3", end="\n")
-
-while True:
-    choice = input("Podaj opcję: ")
-
-    if choice == "1":
-        numberbin = input("Podaj liczbe binarną: ")
-        try:
-            bin_to_dec = bintodec(numberbin)
-            print("Wynik: ", bin_to_dec, end="\n")
-        except TypeError:
-            print("Nieprawidłowa wprowadzona liczba\n")
-        except ValueError:
-            print("Nieprawidłowa wprowadzona liczba\n")
-
-    elif choice == "2":
-        numberdec = int(input("Podaj liczbe dzesietna: "))
-        try:
-            dec_to_bin = dectobin(numberdec)
-            print("Wynik: ", dec_to_bin, end='\n')
-        except TypeError:
-            print("Nieprawidłowa wprowadzona liczba\n")
-        except ValueError:
-            print("Nieprawidłowa wprowadzona liczba\n")
-
-    elif choice == "3":
-        print("Wyjście")
-        break
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = ConvertBINtoDEC(root)
+    root.mainloop()
