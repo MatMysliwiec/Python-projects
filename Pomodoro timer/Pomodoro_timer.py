@@ -22,6 +22,7 @@ class PomodoroTimer:
         self.master = master
         self.master.title("Pomodoro Timer")
         self.master.geometry("300x150")
+        self.master.resizable(False, False)
 
         self.default_work_duration = 0
         self.default_break_duration = 0
@@ -56,6 +57,7 @@ class PomodoroTimer:
 
         settings_dialog = tk.Toplevel(self.master)
         settings_dialog.title("Timer Settings")
+        settings_dialog.resizable(False, False)
 
         def update_total_time_label():
             # noinspection PyBroadException
@@ -114,7 +116,7 @@ class PomodoroTimer:
             self.reset_button.config(state="active")
 
             self.start_pomodoro_timer()
-        except ValueError:
+        except Exception:
             messagebox.showerror("Invalid Input", "Please enter valid numerical values")
 
     def start_pomodoro_timer(self):
@@ -154,7 +156,7 @@ class PomodoroTimer:
                     self.break_duration = self.default_break_duration * 60
                 else:
                     self.timer_label.config(text="Pomodoro Timer completed.", font=("Helvetica", 12))
-                    self.start_button.config(state="normal")
+                    self.start_button.config(state="disabled")
                     self.current_cycle = 0
                     return
 
