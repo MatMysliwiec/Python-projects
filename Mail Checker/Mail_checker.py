@@ -17,7 +17,7 @@ def check_email_imap(username, password, server, port=993):
                 for email_id in email_ids:
                     result, message_date = mail.fetch(email_id, "(RFC822)")
                     if result == "OK":
-                        print(f"Email {email_id}:\n{message_date[0][1]}")
+                        print(f"Email {email_id}")
         mail.logout()
     except Exception as e:
         print(f"Error: {e}")
@@ -25,10 +25,12 @@ def check_email_imap(username, password, server, port=993):
 
 if __name__ == "__main__":
     username = input("Enter your email address: ")
-    password = getpass.getpass("Enter your email password: ")
+    password = input("Enter your email password: ")
     server = input("Enter your email server (e.g. imap.gmail.com): ")
-    port = int(input("Enter the server port (press Enter for default port = 993): "))
-
+    try:
+        port = int(input("Enter the server port (press Enter for default port = 993): "))
+    except ValueError:
+        port = 993
     interval = int(input("Enter the interval for checking emails in seconds: "))
 
     try:
