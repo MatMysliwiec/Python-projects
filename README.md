@@ -43,7 +43,7 @@ Bubble sort is a simple comparison-based sorting algorithm that repeatedly steps
 The provided code is a Python script that monitors network bandwidth usage (upload and download) over a specified duration using the psutil library for system monitoring and matplotlib for visualization. Takes a duration (in minutes) as input and continuously monitors network bandwidth usage for the specified duration. It collects timestamps along with upload and download data at regular intervals using psutil. It updates the user with the time remaining during the monitoring process.
 Returns the collected data as lists of timestamps, upload data, and download data.
 
-### Future improvement
+### Future plans
 - [ ] Implement robust error handling to gracefully handle exceptions and invalid user inputs.
 - [ ] Optimize the code for better performance, especially if monitoring bandwidth over longer durations or on systems with limited resources. Look for opportunities to reduce unnecessary computations or improve algorithm efficiency.
 - [ ] Explore different visualization techniques or libraries to present the network usage data more effectively. Consider adding additional information to the plot, such as labels, annotations, or summary statistics.
@@ -60,7 +60,7 @@ Project implements a simple banking system with different types of accounts: Che
 - SavingsAccount: Inherits from Account and represents a savings account. Supports depositing, withdrawing, and adding interest to the balance based on an interest rate.
 - BusinessAccount: Inherits from Account and represents a business account. Enables depositing and withdrawing funds, with a transaction fee applied for withdrawals.
 
-### Future improvement
+### Future plans
 - [ ] Implement error handling mechanisms to handle edge cases such as invalid input values (e.g., negative deposit/withdrawal amounts), ensuring that the system remains robust and secure.
 - [ ] Implement transaction logging functionality to keep track of all deposit, withdrawal, and interest transactions. This provides an audit trail for account activities and enhances transparency.
 - [ ] Implement additional functionality for account management, such as closing an account, transferring funds between accounts, or updating account details (e.g., changing overdraft limits for checking accounts).
@@ -101,7 +101,25 @@ Python project is a simplified implementation of the classic card game Blackjack
 
 ## Bugdet tracker
 
+Simple budget tracker that allows users to record their incomes, expenses, and recurring costs. It consists of several classes:
+
+- Transaction: An abstract base class representing a generic financial transaction with attributes such as amount, description, and date.
+- Income, Expense: subclasses of Transaction representing income and expense transactions.
+- RecurringCost: A subclass of Transaction representing recurring expenses. It extends the Transaction class by adding attributes for start date, end date, and frequency of recurrence.
+- BudgetTracker: A class that manages the tracking of incomes, expenses, and recurring costs. It provides methods to add transactions and calculate the net cash flow within a specified time period and display all transactions recorded.
+
+### Future plans
+
+- [ ] Implement error handling mechanisms to handle cases such as invalid input data, date inconsistencies, or overlapping recurring costs.
+- [ ] Integrate a database or file system storage to persist transaction data between program executions.
+- [ ] Provide more comprehensive reporting capabilities, such as generating monthly or yearly summaries, graphical representations of cash flow trends, or breakdowns by category.
+- [ ] Develop a user-friendly interface, either through a graphical user interface (GUI) or a web application, to make it easier for users to interact with the budget tracker.
+- [ ] Implement security measures to protect sensitive financial data, such as encryption of stored data and user authentication mechanisms.
+- [ ] Implement notifications or alerts to notify users of upcoming bills, irregular spending patterns, or other important financial events.
+
 ## Calculator
+
+Simple calculator implementation that utilizes a functional programming approach. The calculator function takes an initial argument and returns a nested function arg_collector. This nested function collects subsequent arguments and operators until it encounters the '=' operator, at which point it performs the arithmetic operations and returns the result. The test_calculator function contains test cases for addition, subtraction, multiplication, division, and exponentiation, verifying the correctness of the calculator implementation.
 
 ## Captcha maker
 
