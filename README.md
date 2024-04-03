@@ -123,13 +123,101 @@ Simple calculator implementation that utilizes a functional programming approach
 
 ## Captcha maker
 
-## Company management
+Project involves generating CAPTCHA images using various methods:
+
+ImageCaptcha Generation: Utilizes the captcha.image library to generate a CAPTCHA image with random alphanumeric characters. The image is saved with the CAPTCHA text appended to the filename.
+
+PIL (Python Imaging Library) Generation: Creates a CAPTCHA image using the PIL library. Similar to the first method, it generates random alphanumeric characters and draws them onto the image. The image is saved with the CAPTCHA text appended to the filename.
+
+Captcha Solver Generation: This method utilizes a captcha solving library (captcha_solver) to generate CAPTCHA images. It generates random alphanumeric characters, saves the image, and returns the CAPTCHA text along with the path to the saved image.
+
+### Future plans
+- [ ] Allow customization of CAPTCHA parameters such as length, character set, image size, and font style.
+- [ ] Evaluate the security implications of CAPTCHA generation, especially if the CAPTCHAs are intended for use in authentication or security-sensitive applications.
+- [ ] If the project is intended for use by end-users, consider developing a simple command-line interface or web interface to make it more user-friendly.
+- [ ] If the project is part of a larger application or framework, consider integrating it as a module or plugin to provide CAPTCHA functionality seamlessly.
+
+## Company manager
+
+Project models an employee management system for a company, providing classes to represent different types of employees and the company itself. Here's a breakdown of its components:
+- Abstract Employee Class (Employee): An abstract base class defining the common interface for all types of employees. It includes an abstract method calculate_pay() to calculate the employee's pay.
+- HourlyEmployee: Represents an employee paid based on hourly rate and hours worked.
+- SalariedEmployee: Represents an employee with a fixed salary.
+- Manager: Subclass of SalariedEmployee, representing a manager with an additional bonus component.
+- Executive: Subclass of Manager, representing an executive with additional stock options.
+- Company Class: Manages the hiring, firing, and raising of employees. It maintains a list of employees and provides methods to perform these actions.
 
 ## Complex number calculator
 
+Perform basic arithmetic operations and other operations on complex numbers:
+- add(a, b): Function to add two complex numbers a and b.
+- sub(a, b): Function to subtract complex number b from complex number a.
+- multi(a, b): Function to multiply two complex numbers a and b.
+- negate(a): Function to negate (find the additive inverse) of a complex number a.
+- invert(a): Function to find the multiplicative inverse of a complex number a.
+- div(a, b): Function to divide complex number a by complex number b.
+- conjugate(a): Function to find the conjugate of a complex number a.
+
+### Future plans
+
+- [ ] Implement error handling to handle cases where invalid input is provided, such as division by zero or non-numeric input.
+- [ ] Implement special methods for arithmetic operators (__add__, __sub__, __mul__, __truediv__) in the Complex_number class. This will allow you to perform arithmetic operations using standard arithmetic operators (+, -, *, /).
+- [ ] Implement additional operations commonly used with complex numbers, such as calculating the magnitude, phase angle, or converting between rectangular and polar form.
+- [ ] Add type annotations to function parameters and return values to improve code readability and maintainability, especially if the project is part of a larger codebase.
+
 ## Distribution function
 
+Project involves computing and comparing the values of the error function (Erf) and its approximations using different methods.
+
+The project imports functions for exponential calculation (exp) and adaptive quadrature integration (KAdapt53) from external modules.
+
+Functions:
+- f(x): Defines a function representing the exponential function.
+- S(a, b): Computes the integral of the exponential function between two points using adaptive quadrature integration.
+- I(k): Computes the integral using S function for a given integer k.
+- dystrybuanta(x): Computes the cumulative distribution function (CDF) of the standard normal distribution.
+- fmt(num, dl): Formats a number into a string with a specified number of decimal places.
+
+Main Calculation and Output: It calculates the values of the CDF for various input values of x and prints them along with the difference between the calculated values and the values obtained from math.erf and scipy.special.erf functions. 
+
+Overall, the project focuses on computing and comparing the values of the error function and its approximations, providing insights into the accuracy of different computational methods for this task.
+
+### Funkcja Exp
+
+Function used in main program, for calculating the exponential function (Kexp) and its approximation (atnexp) using a series expansion. 
+
+atnexp Function: Computes an approximation of the exponential function using a series expansion. It takes a single argument x and returns the approximate value of exp(x). The series expansion coefficients are stored in the atn list.
+
+Computes the exponential function using a combination of rounding and series expansion. It rounds the input x and computes the exponential function using the atnexp function. The function also accounts for different powers of e based on the rounded value of x.
+
+### Adapt53
+Recursive function KAdapt53 for adaptive quadrature integration using Simpson's rule.
+
+Inputs:
+- a, c, b: Lower, midpoint, and upper bounds of the integration interval.
+- fa, fc, fb: Function values at a, c, and b.
+- func: The function to be integrated.
+- eps: The desired tolerance for the error in the integration.
+
+The function computes two approximations of the integral using Simpson's rule: one with a single step of third order (s3) and one with two steps of third order (s5). It then compares the absolute difference between these two approximations (s3 and s5) with the tolerance eps. If the difference is within tolerance, it returns the result computed with five steps of third order (Integ). If the difference is not within tolerance, the function recursively calls itself for the intervals [a, ac] and [c, b], where ac is the midpoint of [a, c] and cb is the midpoint of [c, b]. It then adds the results of these recursive calls and returns the total result. 
+
+Output: The function returns the approximate value of the integral of func over the interval [a, b] with an error tolerance of eps.
+
 ## Doctor scheduler
+
+Create a simple appointment scheduling system for doctors and patients.
+- Patient Class: Represents a patient with attributes name and appointment_time.
+- Doctor Class: Represents a doctor with attributes name, patients (list of patients), and work_time (defaulted to work hours from 8 AM to 4 PM). It has a method add_patient to schedule a patient's appointment with the doctor.
+- Scheduler Class: Manages the scheduling of patients with doctors. It maintains a list of doctors and has a method schedule_patient to assign a patient to an available doctor.
+
+### Future plans
+
+- [ ] Allow doctors to specify their available appointment slots rather than a fixed number (e.g., 16) per day.
+- [ ] Implement logic to handle cases where appointments overlap or exceed the doctor's work hours.
+- [ ] Add error handling to deal with invalid input for appointment times or doctor's work hours.
+- [ ] Implement a prioritization system for scheduling patients based on urgency or severity of their condition.
+- [ ] Consider storing appointment data in a database or file for persistence across program executions.
+- [ ] Develop a user interface (CLI, web, etc.) to interact with the scheduling system more intuitively.
 
 ## Event scheduler
 
