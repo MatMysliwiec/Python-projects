@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from PIL import Image, ImageTk
 from tkinter import ttk
 import tkinter as tk
-
+import cv2
 
 class ImageBase(ABC):
     @abstractmethod
@@ -19,10 +19,19 @@ class JPEGImage(ImageBase):
         self.image = None
 
     def load(self, file_path):
-        self.image = Image.open(file_path)
+        self.image = cv2.imread(file_path)
+        if self.image is None:
+            raise FileNotFoundError(f"Image file not found or cannot be opened: {file_path}")
+
 
     def display(self, canvas):
-        tk_image = ImageTk.PhotoImage(self.image)
+        if self.image is None:
+            raise ValueError("Image is not loaded.")
+        height = 300
+        ratio = height / self.image.shape[0]
+        width = int(self.image.shape[1] * ratio)
+        resized_image = cv2.resize(self.image,(width,height), interpolation=cv2.INTER_LINEAR)
+        tk_image = ImageTk.PhotoImage(resized_image)
         canvas.create_image(0, 0, anchor=tk.NW, image=tk_image)
         canvas.tk_image = tk_image
 
@@ -51,12 +60,12 @@ class ImageGalleryApp:
         gallery_frame.pack(fill=tk.BOTH, expand=True)
 
         for i, image in enumerate(self.images):
-            canvas = tk.Canvas(gallery_frame, width=300, height=200)
+            canvas = tk.Canvas(gallery_frame, width=400, height=300)
             canvas.grid(row=i // 3, column=i % 3, padx=10, pady=10)
             image.display(canvas)
 
 
-if __name__ == "__main":
+if __name__ == "__main__":
     root = tk.Tk()
     image_paths = [
         r"C:\Users\User\OneDrive - Politechnika Krakowska im. Tadeusza Kościuszki\Pulpit\Projekty_python\Image gallery\Image file\img1.jpg",

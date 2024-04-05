@@ -16,6 +16,7 @@ class EventSchedulerApp:
     def __init__(self, master):
         self.master = master
         self.master.title("Event Scheduler")
+        self.master.geometry("280x150")
 
         self.events = []
 
@@ -40,7 +41,7 @@ class EventSchedulerApp:
         self.calendar_button = tk.Button(master, text="View Calendar", command=self.display_calendar)
         self.calendar_button.grid(row=5, column=0, columnspan=2)
 
-        self.search_button = tk.Button(master, text="Search Calendar", command=self.search_cal)
+        self.search_button = tk.Button(master, text="Open Calendar", command=self.search_cal)
         self.search_button.grid(row=6, column=0, columnspan=2)
 
     def add_event(self):
@@ -78,7 +79,7 @@ class EventSchedulerApp:
         for event in self.events:
             listbox.insert(tk.END, str(event))
 
-    def search_cal(self):
+    def open_cal(self):
         keyword = tk.simpledialog.askstring("Search", "Enter to search")
         if keyword is None:
             return

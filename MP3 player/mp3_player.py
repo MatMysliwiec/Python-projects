@@ -17,23 +17,29 @@ class MP3Player:
         self.create_widgets()
 
     def create_widgets(self):
+        self.title_label = tk.Label(self.master, text="MP3 Player", font="Helvetica 24")
+        self.title_label.pack(pady=10)
+
+        self.music_title = tk.Label(self.master, text="", font="Helvetica 18")
+        self.music_title.pack(pady=5)
+
         self.play_button = tk.Button(self.master, text="Play", command=self.play)
         self.play_button.pack(pady=10)
 
         self.pause_button = tk.Button(self.master, text="Pause", command=self.pause)
-        self.pause_button.pack(pady=5)
+        self.pause_button.pack(side=tk.LEFT, padx=5)
 
         self.stop_button = tk.Button(self.master, text="Stop", command=self.stop)
-        self.stop_button.pack(pady=5)
+        self.stop_button.pack(side=tk.LEFT, padx=5)
 
         self.next_button = tk.Button(self.master, text="Next", command=self.next)
-        self.next_button.pack(pady=5)
+        self.next_button.pack(side=tk.LEFT, padx=5)
 
         self.prev_button = tk.Button(self.master, text="Prev", command=self.prev)
-        self.prev_button.pack(pady=5)
+        self.prev_button.pack(side=tk.LEFT, padx=5)
 
         self.add_button = tk.Button(self.master, text="Add to Playlist", command=self.add)
-        self.add_button.pack(pady=10)
+        self.add_button.pack(side=tk.LEFT, pady=10)
 
         pygame.init()
         pygame.mixer.init()
