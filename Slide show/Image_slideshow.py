@@ -26,14 +26,16 @@ class SlideshowApp:
 
         self.master.after(self.transition_duration, self.fade_out)
 
-    def fade_out(self):
-        for alpha in range(255, -1, -1):
+    def fade_out(self, alpha=255):
+        if alpha >= 0:
             self.canvas.delete("all")
-            current_image = self.photo_images[self.current_image_index]
+            current_image = self.photo_images[self.current_image_index].copy()
             current_image.putalpha(alpha)
-            self.canvas.create_image(0, 0, archor=tk.NW, image=current_image)
+            self.canvas.create_image(0, 0, anchor=tk.NW, image=current_image)
             self.master.update()
-            time.sleep(0.5)
+            self.master.after(10, self.fade_out, alpha - 1)
+        else:
+            self.master.after(10, self.next_image)
 
         self.master.after(10, self.next_image)
 
