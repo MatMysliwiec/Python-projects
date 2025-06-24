@@ -54,11 +54,11 @@ class MoveMouse:
         time.sleep(1)
         pyautogui.moveTo(self.c3_user_x, self.c3_user_y)
         pyautogui.click()
-        pyautogui.write('piotrk1')
+        pyautogui.write('****')
 
         pyautogui.moveTo(self.c3_pass_x, self.c3_pass_y)
         pyautogui.click()
-        pyautogui.write('1')
+        pyautogui.write('****')
 
         pyautogui.moveTo(self.c3_login_x, self.c3_login_y)
         pyautogui.click()
@@ -67,11 +67,11 @@ class MoveMouse:
         
         pyautogui.moveTo(self.yms_user_x, self.yms_user_y)
         pyautogui.click()
-        pyautogui.write('kutnoviewer')
+        pyautogui.write('****')
 
         pyautogui.moveTo(self.yms_pass_x, self.yms_pass_y)
         pyautogui.click()
-        pyautogui.write('NewPassword2502!')
+        pyautogui.write('****')
 
         pyautogui.moveTo(self.yms_login_x, self.yms_login_y)
         pyautogui.click()
@@ -149,11 +149,11 @@ class MoveMouse:
 
         pyautogui.moveTo(self.c3_user_x, self.c3_user_y)
         pyautogui.click()
-        pyautogui.write('piotrk1')
+        pyautogui.write('****')
 
         pyautogui.moveTo(self.c3_pass_x, self.c3_pass_y)
         pyautogui.click()
-        pyautogui.write('1')
+        pyautogui.write('****')
 
         pyautogui.moveTo(self.c3_login_x, self.c3_login_y)
         pyautogui.click()
@@ -167,11 +167,11 @@ class MoveMouse:
         
         pyautogui.moveTo(self.yms_user_x, self.yms_user_y)
         pyautogui.click()
-        pyautogui.write('kutnoviewer')
+        pyautogui.write('****')
 
         pyautogui.moveTo(self.yms_pass_x, self.yms_pass_y)
         pyautogui.click()
-        pyautogui.write('NewPassword2502!')
+        pyautogui.write('****')
 
         pyautogui.moveTo(self.yms_login_x, self.yms_login_y)
         pyautogui.click()
