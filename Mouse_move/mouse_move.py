@@ -61,7 +61,8 @@ class MoveMouse:
         self.timer_label.config(text="Initial")
 
         self.rdp, self.connect = False, False
-        os.startfile(r"C:\Users\mysliwiecm\OneDrive - NewCold Cooperatief UA\Desktop\MFCS.rdp")
+        #RDP file
+        os.startfile(r"****")
 
         self.timeout = 30
         start_time = time.time()
@@ -84,9 +85,12 @@ class MoveMouse:
 
         time.sleep(2)
 
+        #C3 page path
         webbrowser.open_new("https://www.c3reservations.com/newcold/app/login")
         os.startfile("C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
+        #YMS page path
         webbrowser.open_new("https://newcold.ymshub.com/login")
+        #Axis client path
         os.startfile("C:\Program Files\Axis Communications\AXIS Camera Station\Client Latest\AcsClient.exe")
 
     def starting(self):
@@ -95,11 +99,11 @@ class MoveMouse:
 
         pyautogui.moveTo(self.c3_user_x, self.c3_user_y)
         pyautogui.click()
-        pyautogui.write('piotrk1')
+        pyautogui.write('****')
 
         pyautogui.moveTo(self.c3_pass_x, self.c3_pass_y)
         pyautogui.click()
-        pyautogui.write('1')
+        pyautogui.write('****')
 
         pyautogui.moveTo(self.c3_login_x, self.c3_login_y)
         pyautogui.click()
@@ -108,11 +112,11 @@ class MoveMouse:
         
         pyautogui.moveTo(self.yms_user_x, self.yms_user_y)
         pyautogui.click()
-        pyautogui.write('kutnoviewer')
+        pyautogui.write('****')
 
         pyautogui.moveTo(self.yms_pass_x, self.yms_pass_y)
         pyautogui.click()
-        pyautogui.write('NewPassword2502!')
+        pyautogui.write('****')
 
         pyautogui.moveTo(self.yms_login_x, self.yms_login_y)
         pyautogui.click()
